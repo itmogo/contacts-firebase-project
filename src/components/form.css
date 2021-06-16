@@ -1,26 +1,38 @@
 form{
     margin:  15px  10px;
     height: 90vh;
+    
+  
+}
+.formShadow{
+    padding: 0 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    border-radius: 10px;
+    
 }
 
-item_down{
+.item_down{
         margin-top: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+        
+}
+
+.action{
+    margin-top: 10px;
 }
 
 label{ 
     font-size: bold;
     padding: 10px;
-    color: #2b2b2b;
-    
-    
+    color: #2b2b2b;     
 }
 
 .down{
-
     display:flex;
     align-items: center;
-    cursor: pointer;
-    
+    cursor: pointer;   
 }
 
 .editbtn{

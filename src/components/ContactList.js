@@ -1,15 +1,16 @@
 import React from 'react';
-import UserItem from './UserItem';
+import ContactItem from './ContactItem';
 import { connect } from 'react-redux';
 //this component displays all the users we have in our users state from App.js
-function UserList(props) {
+function ContactList(props) {
   return (
     <div>
       {/* we loop through all the users and for every user,
          we display a UserItem component. We also pass the user as a prop
          to UserItem so that we can display it */}
-      {props.users.map((user) => (
-        <UserItem user={user} />
+      {props.contacts.map((contact) => (
+        <ContactItem contact={contact}         
+        />
       ))}
     </div>
   );
@@ -17,8 +18,8 @@ function UserList(props) {
 
 function mapStateToProps(state) {
   return {
-    users: state.users,
+    contacts: state.contacts,
   };
 }
 
-export default connect(mapStateToProps, {})(UserList);
+export default connect(mapStateToProps, {})(ContactList);

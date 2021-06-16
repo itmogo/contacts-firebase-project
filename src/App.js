@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 import './App.css';
-import UserForm from './components/UserForm';
-import UserList from './components/UserList';
+import ContactForm from './components/ContactForm';
+import ContactList from './components/ContactList';
 import './components/form.css';
 
 function App() {
@@ -15,13 +15,13 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="col-md-5">
-        <h4>Users Form</h4>
-          <UserForm />
+        <h4>Contacts Form</h4>
+          <ContactForm />
         </div>
 
         <div className="col-md-7">
-        <h4>Users List</h4>
-          <UserList />
+        <h4>Contacts List</h4>
+          <ContactList />
         </div>
       </div>
     </div>

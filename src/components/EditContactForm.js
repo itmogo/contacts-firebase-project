@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { addUserAction } from "../actions/userActions";
 import { connect } from "react-redux";
-import "./form.css";
+import { updateContactAction } from "../actions/contactActions";
 import { Button, Form } from "react-bootstrap";
 
 //user sign up component
-function UserForm(props) {
+
+  function EditContactForm(props) {
   // default user state is an object with empty string as value
-  const [state, setState] = useState({
-    username: "",
-    email: "",
-    password: "",
-    country: "",
+  const[state, setState] = useState({
+    contactname: props.contact.contactname,
+    email: props.contact.email,
+    password: props.contact.password,
+    country: props.contact.country,
   });
 
   //a function that get called anytime an input field changes
@@ -30,52 +30,53 @@ function UserForm(props) {
   function handleSubmit() {
     //we call addUser function passed to this user form component
     //as a prop from the App component
-    let userId = 10000 + Math.random() * 10000000;
-    let user = { ...state, id: userId };
-    props.addUserAction(user);
+
+    let contact = { ...state, id: props.contact.id };
+    props.updateContactAction(props.contact.id, contact);
+    props.hideModal();
   }
 
   return (
     <div>
       <form>
         <div>
-         <Form.Group controlId="formBasicEmail">
-          <Form.Label>User Name</Form.Label>
-          <Form.Control 
-          type="email" 
-          placeholder="Enter email" 
-          name="username"
-          value={state.username} //the value will the same as data in the state
-          onChange={handleOnChange} //we setup onchange to call our handle onchange function
-          required />
+          <Form.Group>
+            <Form.Label>Contact Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter contact name"
+              name="contactname"
+              value={state.contactname} //the value will the same as data in the state
+              onChange={handleOnChange} //we setup onchange to call our handle onchange function
+              required
+            />
           </Form.Group>
-
         </div>
         <br />
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Email address</Form.Label>
-          <Form.Control 
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={state.email}
-          onChange={handleOnChange} //we setup onchange to call our handle onchange function
-          required/>         
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={state.email}
+            onChange={handleOnChange} //we setup onchange to call our handle onchange function
+            required
+          />
         </Form.Group>
-       
         <br />
         <Form.Group>
-          <Form.Label>Country</Form.Label>          
-            <Form.Control
+          <Form.Label>Country</Form.Label>
+          <Form.Control
             type="text"
             name="country"
             value={state.country}
             onChange={handleOnChange} //we setup onchange to call our handle onchange function
             placeholder="Enter country"
-            required/>
+            required
+          />
         </Form.Group>
         <br />
-
         <Form.Group>
           <Form.Label>Password</Form.Label>
           <br />
@@ -85,23 +86,24 @@ function UserForm(props) {
             value={state.password}
             onChange={handleOnChange} //we setup onchange to call our handle onchange function
             placeholder="Your password..."
-            required />
+            required
+          />
         </Form.Group>
-        <br /><br />
-
+        <br />
         <div>
           {/* the create user button call the handleSubmit functon when clicked */}
           <Button type="button" variant="primary" onClick={handleSubmit}>
-            <span>Create New User</span>
+            Update Contact 
           </Button>
         </div>
       </form>
     </div>
   );
 }
-// function mapStateToProps(state) {
-//   return {
-//     state: state,
-//   };
-// }
-export default connect(null, { addUserAction })(UserForm);
+
+let mapDispatchToProps = {
+  updateContactAction,
+};
+
+let mapStateToProps = () => {};
+export default connect(mapStateToProps, mapDispatchToProps)(EditContactForm);
