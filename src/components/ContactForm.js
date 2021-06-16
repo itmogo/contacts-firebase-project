@@ -7,7 +7,7 @@ import { Button, Form } from "react-bootstrap";
 //user sign up component
 function ContactForm(props) {
   // default user state is an object with empty string as value
-  const[state, setState] = useState({
+  const [state, setState] = useState({
     contactname: "",
     email: "",
     password: "",
@@ -33,46 +33,54 @@ function ContactForm(props) {
     let contactId = 10000 + Math.random() * 10000000;
     let contact = { ...state, id: contactId };
     props.addContactAction(contact);
+    setState({
+      contactname: "",
+      email: "",
+      password: "",
+      country: "",
+    });
   }
 
   return (
     <div>
       <form className="formShadow">
         <div>
-         <Form.Group>
-          <Form.Label>Contact Name</Form.Label>
-          <Form.Control 
-          type="contactname" 
-          placeholder="Enter Contact Name" 
-          name="contactname"
-          value={state.contactname} //the value will the same as data in the state
-          onChange={handleOnChange} //we setup onchange to call our handle onchange function
-          required />
+          <Form.Group>
+            <Form.Label>Contact Name</Form.Label>
+            <Form.Control
+              type="contactname"
+              placeholder="Enter Contact Name"
+              name="contactname"
+              value={state.contactname} //the value will the same as data in the state
+              onChange={handleOnChange} //we setup onchange to call our handle onchange function
+              required
+            />
           </Form.Group>
-
         </div>
         <br />
         <Form.Group>
           <Form.Label>Email address</Form.Label>
-          <Form.Control 
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={state.email}
-          onChange={handleOnChange} //we setup onchange to call our handle onchange function
-          required/>         
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={state.email}
+            onChange={handleOnChange} //we setup onchange to call our handle onchange function
+            required
+          />
         </Form.Group>
-       
+
         <br />
         <Form.Group>
-          <Form.Label>Country</Form.Label>          
-            <Form.Control
+          <Form.Label>Country</Form.Label>
+          <Form.Control
             type="text"
             name="country"
             value={state.country}
             onChange={handleOnChange} //we setup onchange to call our handle onchange function
             placeholder="Enter country"
-            required/>
+            required
+          />
         </Form.Group>
         <br />
 
@@ -85,9 +93,11 @@ function ContactForm(props) {
             value={state.password}
             onChange={handleOnChange} //we setup onchange to call our handle onchange function
             placeholder="Your password..."
-            required />
+            required
+          />
         </Form.Group>
-        <br /><br />
+        <br />
+        <br />
 
         <div>
           {/* the create user button call the handleSubmit functon when clicked */}
