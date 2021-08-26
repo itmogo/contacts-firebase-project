@@ -1,9 +1,16 @@
-export function addContactAction(contact) {
-    return {
-      type: 'ADD_CONTACT',
-      payload: contact,
-    };
-  }
+export const addContactAction = (contact) => {
+    return(dispatch, state, {getFirestore}) => {
+      getFirestore()
+      .collection('contacts')
+      .add(contact)
+      .then((doc) => {
+        dispatch({
+            type: 'ADD_CONTACT',
+            payload: contact,
+          });
+      });
+    };   
+  };
   
   export function deleteContactAction(id) {
     return {
