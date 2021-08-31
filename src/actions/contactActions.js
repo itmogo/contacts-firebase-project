@@ -10,10 +10,11 @@ export const addContactAction = (contact) => {
         
         // to display data on the User interface
         // but data disppears after page refresh
-        dispatch({
-           type: 'ADD_CONTACT',
-           payload: contact,
-         });
+        //this command is commented because to prevent double data
+       // dispatch({
+         //  type: 'ADD_CONTACT',
+         //  payload: contact,
+         //});
       });
     };   
   };
@@ -31,4 +32,30 @@ export const addContactAction = (contact) => {
       payload: { id: id, updatedContactInfo: updatedContact },
     };
   }
+
+
+  // get data from firebase database 
+  // include componentDidMount on App js component
+
+  export const getAllContacts = ()=>{
+    return (dispatch, state, {getFirestore}) =>{
+      getFirestore()
+      .collection("contacts")
+     // .orderBy("")
+      .onSnapshot((snapshot) =>{
+        let contacts = [];
+        snapshot.forEach ((doc)=>{
+          contacts.push(doc.data());
+        });
+        console.log(contacts);
+        dispatch({
+          type: "SET_ALL_CONTACTS",
+            payload: contacts,
+        });
+      },
+       (err) =>{}
+      );
+    };
+  }
+
   

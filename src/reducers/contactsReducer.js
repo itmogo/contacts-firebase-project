@@ -23,6 +23,10 @@ export default function (state = initalState, action) {
         return contact;
       });
       return { contacts: contactsAfterUpdate };
+      // assist in displaying data from firestore to UI frontend  
+      case 'SET_ALL_CONTACTS':
+        return {contacts: action.payload};
+
     default:
       return state;
   }
