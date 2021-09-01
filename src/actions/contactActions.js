@@ -30,11 +30,21 @@ export const addContactAction = (contact) => {
      };    
   };
   
+  // update data in firease db
   export function updateContactAction(id, updatedContact) {
-    return {
-      type: 'UPDATE_CONTACT',
-      payload: { id: id, updatedContactInfo: updatedContact },
-    };
+    return (dispatch, state, {getFirestore})=>{
+      getFirestore()
+      .collection('contacts')
+      .doc(id)
+      .set(updatedContact)
+      .then(() =>{}) //if success
+      .catch((err) =>{}); // if not success
+    }
+    
+    //  {
+    //   type: 'UPDATE_CONTACT',
+    //   payload: { id: id, updatedContactInfo: updatedContact },
+    // };
   }
   // get data from firebase database 
   // include componentDidMount on App js component
@@ -46,7 +56,7 @@ export const addContactAction = (contact) => {
      // .orderBy("")
      // onsnapshot capture a copy of the db
       .onSnapshot((snapshot) =>{
-        let contacts = [];
+        let contacts = []; // snapshot doc is passed to this array
         snapshot.forEach ((doc)=>{ // maps the data one after another
           //this code moves all data from firestore and add id
           // so it individual contacts can be deleted

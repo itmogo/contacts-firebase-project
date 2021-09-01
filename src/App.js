@@ -8,14 +8,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 
-
 export class App extends Component {
 
   //display data from firestore 
   // display data on UI front end
   componentDidMount(){
     this.props.getAllContacts();
-    }
+  }
 
   render(){
     return (
@@ -38,11 +37,10 @@ export class App extends Component {
           </div>
         </div>
       </div>
-      </div>
-  
+      </div>  
     );
   }
-  }
+}
 
   const mapStateToProps = (state)=>({
     contacts: state.contacts,
