@@ -19,12 +19,16 @@ export const addContactAction = (contact) => {
     };   
   };
   
+  // deleting data from the firestore database
   export function deleteContactAction(id) {
-    return {
-      type: 'DELETE_CONTACT',
-      payload: id,
-    };
-  }
+     return (dispatch, state, {getFirestore})=>{
+       getFirestore()
+       .collection('contacts')
+       .doc(id)
+       .delete()
+       .then(()=> { });
+     };    
+  };
   
   export function updateContactAction(id, updatedContact) {
     return {
@@ -32,8 +36,6 @@ export const addContactAction = (contact) => {
       payload: { id: id, updatedContactInfo: updatedContact },
     };
   }
-
-
   // get data from firebase database 
   // include componentDidMount on App js component
 
@@ -42,10 +44,13 @@ export const addContactAction = (contact) => {
       getFirestore()
       .collection("contacts")
      // .orderBy("")
+     // onsnapshot capture a copy of the db
       .onSnapshot((snapshot) =>{
         let contacts = [];
-        snapshot.forEach ((doc)=>{
-          contacts.push(doc.data());
+        snapshot.forEach ((doc)=>{ // maps the data one after another
+          //this code moves all data from firestore and add id
+          // so it individual contacts can be deleted
+          contacts.push({...doc.data(), id: doc.id}); 
         });
         console.log(contacts);
         dispatch({
@@ -57,5 +62,5 @@ export const addContactAction = (contact) => {
       );
     };
   }
-
+  
   
