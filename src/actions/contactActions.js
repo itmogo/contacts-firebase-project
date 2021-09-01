@@ -4,7 +4,8 @@ export const addContactAction = (contact) => {
   return(dispatch, state, {getFirestore}) => {
       getFirestore()
       .collection('contacts')
-      .add(contact)
+      // this code will add time of creating the doc in the database
+      .add({...contact, timestamp: getFirestore().FieldValue.serverTimestamp()})
       .then((doc) => {
         console.log(doc);
         
@@ -53,7 +54,8 @@ export const addContactAction = (contact) => {
     return (dispatch, state, {getFirestore}) =>{
       getFirestore()
       .collection("contacts")
-     // .orderBy("")
+      //sorting contacts by contactname in ascending order
+     .orderBy("contactname", "asc")
      // onsnapshot capture a copy of the db
       .onSnapshot((snapshot) =>{
         let contacts = []; // snapshot doc is passed to this array
