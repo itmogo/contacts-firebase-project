@@ -45,7 +45,7 @@ function ContactItem(props){
               className="editbtn action"
               onClick={showModal}
             >
-              Update</Button>
+              <span>Update</span></Button>
             {/* We setup edit user modal */}
 
             <Modal show={isModalVisible} onHide={hideModal}>
@@ -57,13 +57,14 @@ function ContactItem(props){
               </Modal.Body>
             </Modal>
             <Button
+            
               variant="danger btn-xs"
-              className="action"
+              className=" editbtn action"
               onClick={() => {
                 props.deleteContactAction(props.contact.id);
               }}
             >
-              Delete
+              <span>Delete</span>
             </Button>
           </div>
         </p>
